@@ -1,6 +1,6 @@
 # KS Digital BD
 
-A responsive software-company website with 33 public pages, an inquiry API and an owner-only inquiry workspace.
+A responsive software-company website with 42 public pages, an inquiry API and an owner-only inquiry workspace.
 
 ## Content
 
@@ -37,3 +37,17 @@ The owner can add verified public email, phone, WhatsApp and address in `/admin?
 The custom domain `ksdigitalbd.com` has been requested but needs DNS records configured through its registrar/provider. Exact records appear in `/admin?view=launch`. After domain validation succeeds, update the origin in `scripts/generate-site.py`, regenerate the canonical metadata and sitemap, and publish. Search Console requires the domain owner's account and verification.
 
 The source is versioned in the Sites repository. Hosting publishes generated Worker output and applies the committed schema migration. Local preview database records and private environment configuration are excluded from source and deployment archives.
+
+
+## Content Studio (CMS)
+
+Open `/admin`, sign in with the owning ChatGPT account, and use:
+
+- **Pages & pricing:** choose a page, edit its text or existing image, add image/video gallery items, and save. Empty text or image URLs remove that content. Restore original page resets that page's overrides.
+- **Blog / Portfolio / Products:** add, edit or delete entries; draft entries stay private. Published entries appear under `/insights`, `/portfolio` or `/products` with their own detail URLs. Prices are free-form labels, allowing BDT prices and custom pricing descriptions.
+- **Media library:** upload JPG, PNG, GIF, WebP, MP4 or WebM (maximum 25 MB per file). Choose uploaded files in editors or copy their media URLs. Files still referenced in page overrides or entries cannot be deleted.
+- **Inquiries / Business details:** retain the original inbox, contact settings and owner permissions.
+
+Edits persist in D1; uploads persist in R2 (`BUCKET`). Uploaded files have public media URLs; do not upload private documents. Entries use plain text, escaped during rendering. Existing authored pages remain under Pages, while newly created entries have draft/published controls. Existing navigation labels and footer content are edited per selected page. Saving changes publishes immediately except entries saved as drafts. Current sessions do not provide collaborative conflict resolution.
+
+The hosted site uses Sites-managed ChatGPT sign-in and the secret `OWNER_EMAIL`. GitHub stores the application source, not production CMS data or uploaded files. Deploying outside Sites requires configuring equivalent trusted authentication, D1 and R2 bindings; a source push alone does not provision them.
